@@ -56,6 +56,33 @@ body {
 	font-weight: bold !important;
 }
 
+/* ========== MENSAGENS ========== */
+
+.msg-container {
+	background-color: #000000;
+	padding: 15px;
+}
+
+.msg {
+	width: 60%;
+	margin: 0 auto;
+	padding: 10px;
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.msg.error {
+	color: #842029;
+	background-color: #f8d7da;
+	border-color: #f5c2c7;
+}
+
+.msg.success {
+	color: #0f5132;
+	background-color: #d1e7dd;
+	border-color: #badbcc;
+}
+
 /* ========== HOME ========== */
 
 #main-container {
@@ -65,7 +92,41 @@ body {
 	padding: 40px;
 }
 
-/* ========== FOOTER========== */
+/* ========== LOGIN / REGISTER ========== */
+
+#auth-row {
+	justify-content: space-evenly;
+}
+
+#login-container h2,
+#register-container h2 {
+	text-align: center;
+	border-bottom: 2px solid #f5c518;
+	width: 200px;
+	margin: 0 auto;
+	padding: 10px;
+}
+
+#login-container form,
+#register-container form {
+	max-width: 400px;
+	margin: 30px auto;
+}
+
+.card-btn {
+	color: #000;
+	background-color: #f5c518;
+	border: 2px solid #f5c518;
+	width: 100%;
+}
+
+.card-btn:hover {
+	color: #f5c518;
+	background-color: transparent;
+	border-color: #f5c518;
+}
+
+/* ========== FOOTER ========== */
 
 #footer {
 	background-color: #000000;

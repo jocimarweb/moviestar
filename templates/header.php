@@ -1,6 +1,9 @@
 <?php
 require_once "globals.php";
 require_once "db.php";
+
+$flassMessage = [];
+
 ?>
 
 <!DOCTYPE html>
@@ -15,7 +18,9 @@ require_once "db.php";
    <link rel="short icon" href="<?php $BASE_URL ?>img/moviestar.ico">
 
    <!-- Bootstrap - CSS -->
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.1/css/bootstrap.css" integrity="sha512-YfFXNd2o6swxA1M0ll6EDdnVdYdE6iz+C6k0Guqf18JW6sVq6Oz9lfbjOso+LMwwNYNxUbp7egkYmC2W/IyeVA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+   <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.1/css/bootstrap.css" integrity="sha512-YfFXNd2o6swxA1M0ll6EDdnVdYdE6iz+C6k0Guqf18JW6sVq6Oz9lfbjOso+LMwwNYNxUbp7egkYmC2W/IyeVA==" crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/css/bootstrap.css" integrity="sha512-drnvWxqfgcU6sLzAJttJv7LKdjWn0nxWCSbEAtxJ/YYaZMyoNLovG7lPqZRdhgL1gAUfa+V7tbin8y+2llC1cw==" crossorigin="anonymous" />
+
    <!-- Font-Awesome -->
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
    <!-- CSS -->
@@ -49,3 +54,12 @@ require_once "db.php";
          </div>
       </nav>
    </header> <!-- # Header -->
+
+   <!-- Mensagens -->
+   <?php if (!empty($flassMessage["msg"])) : ?>
+
+      <div class="msg-container">
+         <p class="msg <?php $flassMessage["type"] ?> "> <?php $flassMessage["msg"] ?> </p>
+      </div>
+
+   <?php endif; ?>
