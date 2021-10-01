@@ -1,8 +1,21 @@
 <?php
 require_once "globals.php";
 require_once "db.php";
+require_once "models/Message.php";
+require_once("dao/UserDAO.php");
 
-$flassMessage = [];
+$message = new Message($BASE_URL);
+
+// echo $message;
+
+$flashMessage = $message->getMessage();
+
+// echo $flashMessage;
+
+if (!empty($flashMessage["msg"])) {
+   // Limpar a Mensagem
+   // $message->clearMessage();
+}
 
 ?>
 
@@ -56,10 +69,10 @@ $flassMessage = [];
    </header> <!-- # Header -->
 
    <!-- Mensagens -->
-   <?php if (!empty($flassMessage["msg"])) : ?>
+   <?php if (!empty($flashMessage["msg"])) : ?>
 
       <div class="msg-container">
-         <p class="msg <?php $flassMessage["type"] ?> "> <?php $flassMessage["msg"] ?> </p>
+         <p class="msg <?php $flashMessage["type"] ?>"><?php $flashMessage["msg"] ?> </p>
       </div>
 
    <?php endif; ?>

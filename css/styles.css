@@ -59,8 +59,9 @@ body {
 /* ========== MENSAGENS ========== */
 
 .msg-container {
-	background-color: #000000;
+	background-color: #badbcc;
 	padding: 15px;
+	/* color: #fff; */
 }
 
 .msg {
@@ -69,6 +70,7 @@ body {
 	padding: 10px;
 	border: 1px solid #000;
 	text-align: center;
+	/* color: #fff; */
 }
 
 .msg.error {
