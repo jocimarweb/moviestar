@@ -1,36 +1,56 @@
 <?php
 
-require_once "models/User.php";
+include_once "models/User.php";
+include_once "models/Message.php";
 
 class UserDAO implements UserDAOInterface
 {
 
    private $conn;
    private $url;
+   private $message;
 
    public function __construct(PDO $conn, $url)
    {
+
       $this->conn = $conn;  // Chamada da Conexão com o DB
       $this->url = $url;  // Chamada da BASE_URL
+      // $this->message = new Message($url);
    }
 
    public function buildUser($data)
    {
       $user = new User();
+
       $user->id = $data['id'];
       $user->name = $data['name'];
       $user->lastname = $data['lastname'];
       $user->email = $data['email'];
       $user->password = $data['password'];
       $user->image = $data['image'];
-      $user->bio = $data['bio'];
       $user->token = $data['token'];
+      $user->bio = $data['bio'];
+
 
       return $user;
    }
 
    public function create(User $user, $authUser = false)
    {
+
+      $stmt = $this->conn->prepare("INSERT INTO users(
+         name, lastname, email, password, token
+         ) VALUES (
+            :name, :lastname, :email, :password, :token
+         )");
+
+      $stmt->bindParam(':name', $user->name);
+      $stmt->bindParam(':lastname', $user->lastname);
+      $stmt->bindParam(':email', $user->email);
+      $stmt->bindParam(':password', $user->password);
+      $stmt->bindParam(':token', $user->token);
+
+      $stmt->execute();
    }
 
    public function update(User $user)
@@ -51,6 +71,23 @@ class UserDAO implements UserDAOInterface
 
    public function findByEmail($email)
    {
+      if ($email != "") {
+
+         $stmt = $this->conn->prepare("SELECT * FROM users WHERE email = :email");
+         $stmt->bindParam(":email", $email);
+         $stmt->execute();
+
+         if ($stmt->rowCount() > 0) {
+
+            $data = $stmt->fetch();
+            $user = $this->buildUser($data);
+            return $user;
+         } else {
+            return false;
+         }
+      } else {
+         return false;
+      }
    }
 
    public function findById($id)

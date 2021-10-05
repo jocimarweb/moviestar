@@ -59,9 +59,8 @@ body {
 /* ========== MENSAGENS ========== */
 
 .msg-container {
-	background-color: #badbcc;
+	background-color: #000;
 	padding: 15px;
-	/* color: #fff; */
 }
 
 .msg {
@@ -70,7 +69,6 @@ body {
 	padding: 10px;
 	border: 1px solid #000;
 	text-align: center;
-	/* color: #fff; */
 }
 
 .msg.error {
@@ -85,12 +83,16 @@ body {
 	border-color: #badbcc;
 }
 
+.fas.fa-bars {
+	color: #fff;
+}
+
 /* ========== HOME ========== */
 
 #main-container {
 	background-color: #000;
 	color: #fff;
-	min-height: 69vh;
+	min-height: 65vh;
 	padding: 40px;
 }
 

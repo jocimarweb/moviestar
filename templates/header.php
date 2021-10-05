@@ -14,7 +14,7 @@ $flashMessage = $message->getMessage();
 
 if (!empty($flashMessage["msg"])) {
    // Limpar a Mensagem
-   // $message->clearMessage();
+   $message->clearMessage();
 }
 
 ?>
@@ -45,7 +45,7 @@ if (!empty($flashMessage["msg"])) {
 
    <header>
       <nav id="main-navbar" class="navbar navbar-expand-lg">
-         <a href="<?php $BASE_URL ?>" class="navbar-brand">
+         <a href="<?php $BASE_URL ?>index.php" class="navbar-brand">
             <img src="<?php $BASE_URL ?>img/logo.svg" alt="MovieStar" id="logo">
             <span id="moviestar-title">MovieStar</span>
          </a>
@@ -70,9 +70,7 @@ if (!empty($flashMessage["msg"])) {
 
    <!-- Mensagens -->
    <?php if (!empty($flashMessage["msg"])) : ?>
-
       <div class="msg-container">
-         <p class="msg <?php $flashMessage["type"] ?>"><?php $flashMessage["msg"] ?> </p>
+         <p class="msg <?= $flashMessage["type"] ?>"><?= $flashMessage["msg"] ?></p>
       </div>
-
    <?php endif; ?>
