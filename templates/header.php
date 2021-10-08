@@ -2,21 +2,22 @@
 require_once "globals.php";
 require_once "db.php";
 require_once "models/Message.php";
-require_once("dao/UserDAO.php");
+require_once "dao/UserDAO.php";
 
 $message = new Message($BASE_URL);
 
-// echo $message;
-
 $flashMessage = $message->getMessage();
-
-// echo $flashMessage;
 
 if (!empty($flashMessage["msg"])) {
    // Limpar a Mensagem
    $message->clearMessage();
 }
 
+$userDao = new UserDAO($conn, $BASE_URL);
+
+$userData = $userDao->verifyToken(false);
+
+// print_r($userData); // testar obj
 ?>
 
 <!DOCTYPE html>
@@ -60,9 +61,31 @@ if (!empty($flashMessage["msg"])) {
          </form>
          <div class="collapse navbar-collapse" id="navbar">
             <ul class="navbar-nav">
-               <li class="nav-item">
-                  <a href="<?php $BASE_URL ?>auth.php" class="nav-link">Entrar / Cadastrar</a>
-               </li>
+               <?php if ($userData) : ?>
+                  <li class="nav-item">
+                     <a href="<?php $BASE_URL ?>newmovie.php" class="nav-link">
+                        <i class="far fa-plus-square">&nbsp; Incluir Filmes</i>
+                     </a>
+                  </li>
+                  <li class="nav-item">
+                     <a href="<?php $BASE_URL ?>dashboard.php" class="nav-link">Meus Filmes</a>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link bold" href="<?php $BASE_URL ?>editprofile.php">
+                        <?php $userData->name;
+                        print_r($userData->name);
+                        ?>
+
+                     </a>
+                  </li>
+                  <li class="nav-item">
+                     <a href="<?php $BASE_URL ?>logout.php" class="nav-link">Sair</a>
+                  </li>
+               <?php else : ?>
+                  <li class="nav-item">
+                     <a href="<?php $BASE_URL ?>auth.php" class="nav-link">Entrar / Cadastrar</a>
+                  </li>
+               <?php endif; ?>
             </ul>
          </div>
       </nav>
@@ -71,6 +94,6 @@ if (!empty($flashMessage["msg"])) {
    <!-- Mensagens -->
    <?php if (!empty($flashMessage["msg"])) : ?>
       <div class="msg-container">
-         <p class="msg <?= $flashMessage["type"] ?>"><?= $flashMessage["msg"] ?></p>
+         <p class="msg <?php $flashMessage["type"] ?>"><?php $flashMessage["msg"] ?></p>
       </div>
    <?php endif; ?>
