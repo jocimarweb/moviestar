@@ -1,6 +1,7 @@
 <?php
-require_once "globals.php";
+
 require_once "db.php";
+require_once "globals.php";
 require_once "models/Message.php";
 require_once "dao/UserDAO.php";
 
@@ -36,7 +37,9 @@ $userData = $userDao->verifyToken(false);
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/css/bootstrap.css" integrity="sha512-drnvWxqfgcU6sLzAJttJv7LKdjWn0nxWCSbEAtxJ/YYaZMyoNLovG7lPqZRdhgL1gAUfa+V7tbin8y+2llC1cw==" crossorigin="anonymous" />
 
    <!-- Font-Awesome -->
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+   <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+
    <!-- CSS -->
    <link rel="stylesheet" href="<?php $BASE_URL ?>css/styles.css">
 
@@ -46,7 +49,7 @@ $userData = $userDao->verifyToken(false);
 
    <header>
       <nav id="main-navbar" class="navbar navbar-expand-lg">
-         <a href="<?php $BASE_URL ?>index.php" class="navbar-brand">
+         <a href="<?php $BASE_URL ?>" class="navbar-brand">
             <img src="<?php $BASE_URL ?>img/logo.svg" alt="MovieStar" id="logo">
             <span id="moviestar-title">MovieStar</span>
          </a>
@@ -73,7 +76,8 @@ $userData = $userDao->verifyToken(false);
                   <li class="nav-item">
                      <a class="nav-link bold" href="<?php $BASE_URL ?>editprofile.php">
                         <?php $userData->name;
-                        print_r($userData->name);
+                        // print_r($userData->name);
+                        echo $userData->name;
                         ?>
 
                      </a>
@@ -94,6 +98,6 @@ $userData = $userDao->verifyToken(false);
    <!-- Mensagens -->
    <?php if (!empty($flashMessage["msg"])) : ?>
       <div class="msg-container">
-         <p class="msg <?php $flashMessage["type"] ?>"><?php $flashMessage["msg"] ?></p>
+         <p class="msg <?= $flashMessage["type"] ?>"><?= $flashMessage["msg"] ?></p>
       </div>
    <?php endif; ?>

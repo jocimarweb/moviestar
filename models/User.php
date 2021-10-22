@@ -1,5 +1,4 @@
 <?php
-
 class User
 {
    public $id;
@@ -11,10 +10,18 @@ class User
    public $token;
    public $bio;
 
+   // public function getFullName(User $user) {
+   //    return $user->name . " " . $user->lastname;
+   // }
+
    public function generateToken()
    {
       return bin2hex(random_bytes(50));
    }
+
+   // public function generateImageName() {
+   //    return bin2hex(random_bytes(60)) . ".jpg";
+   // }
 
    public function generatePassword($password)
    {
@@ -28,12 +35,12 @@ interface UserDAOInterface
    public function buildUser($data);
    public function create(User $user, $authUser = false);
    public function update(User $user);
-   public function  verifyToken($protected = false);
+   public function findByToken($token);
+   public function verifyToken($protected = true);
    public function setTokenToSession($token, $redirect = true);
    public function authenticateUser($email, $password);
    public function findByEmail($email);
    public function findById($id);
-   public function findByToken($token);
    public function destroyToken();
    public function changePassword(User $user);
 }
