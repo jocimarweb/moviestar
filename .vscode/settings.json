@@ -4,5 +4,11 @@
       "flash",
       "lastname",
       "moviestar"
-   ]
+   ],
+   "editor.tabSize": 2,
+   "html.format.wrapAttributesIndentSize": 2,
+   "html.format.indentInnerHtml": true,
+   "html.format.indentHandlebars": true,
+   "prettier.useTabs": true,
+   "prettier.vueIndentScriptAndStyle": true
 }
