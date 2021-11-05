@@ -11,6 +11,9 @@ $userData = $userDao->verifyToken(true);
 
 $fullName = $user->getFullName($userData);
 
+if ($userData->image = "") {
+  $userData->image = "user.png";
+}
 
 ?>
 
@@ -39,8 +42,8 @@ $fullName = $user->getFullName($userData);
         </div>
         <!-- Imagem do Usuário -->
         <div class="col-md-4">
-          <div id="profile-image-container">
-
+          <div id="profile-image-container" style="background-image: url('<?php $BASE_URL ?>img/users/<?php echo $userData->image; ?>');">
+            <?php echo $userData->image; ?>
           </div>
         </div>
       </div>
