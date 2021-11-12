@@ -1,14 +1,16 @@
 <?php
+
 class User
 {
+
    public $id;
    public $name;
    public $lastname;
    public $email;
    public $password;
    public $image;
-   public $token;
    public $bio;
+   public $token;
 
    public function getFullName(User $user)
    {
@@ -20,19 +22,15 @@ class User
       return bin2hex(random_bytes(50));
    }
 
-   // public function generateImageName() {
-   //    return bin2hex(random_bytes(60)) . ".jpg";
-   // }
-
-   public function generatePassword($password)
+   public function generateImageName()
    {
-      return password_hash($password, PASSWORD_DEFAULT);
+      return bin2hex(random_bytes(60)) . ".jpg";
    }
 }
 
-
 interface UserDAOInterface
 {
+
    public function buildUser($data);
    public function create(User $user, $authUser = false);
    public function update(User $user);
@@ -42,6 +40,5 @@ interface UserDAOInterface
    public function authenticateUser($email, $password);
    public function findByEmail($email);
    public function findById($id);
-   public function destroyToken();
    public function changePassword(User $user);
 }

@@ -58,7 +58,7 @@ class UserDAO implements UserDAOInterface
       }
    }
 
-   public function update(User $user)
+   public function update(User $user, $redirect = true)
    {
       $stmt = $this->conn->prepare("UPDATE users SET
          name = :name,

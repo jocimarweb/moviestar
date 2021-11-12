@@ -1,56 +1,83 @@
 <?php
-require_once "templates/header.php";
-require_once "models/User.php";
-require_once "dao/UserDAO.php";
+
+require_once("templates/header.php");
+
+// Checa autenticação
+require_once("models/User.php");
+require_once("dao/UserDAO.php");
 
 $user = new User();
 
-$userDao = new UserDAO($conn, $BASE_URL);
+// Verifica o token, se não for o correto redireciona para a home
+$useDao = new UserDAO($conn, $BASE_URL);
 
-$userData = $userDao->verifyToken(true);
+$userData = $useDao->verifyToken(true);
 
 $fullName = $user->getFullName($userData);
 
-if ($userData->image = "") {
+if ($userData->image == "") {
   $userData->image = "user.png";
 }
 
 ?>
-
-<div id="main-container" class="container-fluid">
+<div id="main-container" class="container-fluid edit-profile-page">
   <div class="col-md-12">
-    <form action="<?php $BASE_URL ?>user_process.php" method="post">
+    <form action="<?php $BASE_URL ?>user_process.php" method="POST" enctype="multipart/form-data">
       <input type="hidden" name="type" value="update">
       <div class="row">
-        <!-- Dados do Usuário -->
         <div class="col-md-4">
-          <h1><?php echo $fullName; ?></h1>
+          <h1><?php $fullName ?></h1>
           <p class="page-description">Altere seus dados no formulário abaixo:</p>
           <div class="form-group">
-            <label for="name">Nome:</label>
-            <input class="form-control" type="text" name="name" id="name" placeholder="Digite o seu nome" value="<?php echo $userData->name; ?>">
+            <label for="name">Nome</label>
+            <input type="text" class="form-control" id="name" name="name" placeholder="Digite seu nome" value="<?php echo $userData->name ?>">
           </div>
           <div class="form-group">
-            <label for="lastname">Sobrenome:</label>
-            <input class="form-control" type="text" name="lastname" id="lastname" placeholder="Digite o seu sobrenonome" value="<?php echo $userData->lastname; ?>">
+            <label for="lastname">Sobrenome</label>
+            <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Digite seu sobrenome" value="<?php echo $userData->lastname ?>">
           </div>
           <div class="form-group">
             <label for="email">E-mail:</label>
-            <input class="form-control disabled" type="text" name="email" id="email" placeholder="Digite o seu sobrenonome" readonly value="<?php echo $userData->email; ?>"> <!-- Utilizando o "readonly", pois o "disable" não envia os dados para o DB -->
+            <input type="email" class="form-control disabled" id="email" name="email" placeholder="Digite seu e-mail" readonly value="<?php echo $userData->email ?>">
           </div>
-          <input class="btn form-btn" type="submit" value="Alterar">
+          <input type="submit" class="btn card-btn" value="Alterar">
         </div>
-        <!-- Imagem do Usuário -->
         <div class="col-md-4">
-          <div id="profile-image-container" style="background-image: url('<?php $BASE_URL ?>img/users/<?php echo $userData->image; ?>');">
-            <?php echo $userData->image; ?>
+          <div id="profile-image-container" style="background-image: url('<?php echo $BASE_URL ?>img/users/<?php echo $userData->image ?>')"></div>
+          <div class="form-group">
+            <label for="image">Foto</label>
+            <input type="file" name="image" class="form-control-file">
+          </div>
+          <div class="form-group">
+            <label for="bio">Sobre você:</label>
+            <textarea class="form-control" id="bio" name="bio" rows="5" placeholder="Conte quem você é, o que faz, onde trabalha..."><?php $userData->bio ?></textarea>
           </div>
         </div>
       </div>
     </form>
+    <div class="row" id="change-password-container">
+      <div class="col-md-4">
+        <h2>Alterar a senha:</h2>
+        <p class="page-description">Digite a nova senha e confirme, para alterar a senha:</p>
+        <form action="<?php $BASE_URL ?>user_process.php" method="POST">
+          <input type="hidden" name="type" value="changepassword">
+          <input type="hidden" name="id" value="<?php $userData->id ?>">
+          <div class="form-group">
+            <label for="password">Senha:</label>
+            <input type="password" class="form-control" id="password" name="password" placeholder="Digite sua senha">
+          </div>
+          <div class="form-group">
+            <label for="confirmpassword">Confirmação de senha:</label>
+            <input type="password" class="form-control" id="confirmpassword" name="confirmpassword" placeholder="Confirme a sua senha">
+          </div>
+          <input type="submit" class="btn card-btn" value="Alterar Senha">
+        </form>
+      </div>
+    </div>
   </div>
 </div>
-
 <?php
-require_once "templates/footer.php";
+
+require_once("templates/footer.php");
+
 ?>
